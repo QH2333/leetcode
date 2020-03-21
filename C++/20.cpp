@@ -8,14 +8,14 @@ class Solution {
 public:
     bool isValid(string s) {
         vector<char> stack;
-        stack.reserve(1);
         int strLen = s.length();
         for (int i = 0; i < strLen; i++)
         {
             if (s[i] == '[' || s[i] == '(' || s[i] == '{') stack.push_back(s[i]);
             else // if (s[i] == ']' || s[i] == ')' || s[i] == '}')
             {
-                if (stack.back() == '[' && s[i] == ']') stack.pop_back(); // Match
+                if (stack.size() == 0) return false;
+                else if (stack.back() == '[' && s[i] == ']') stack.pop_back(); // Match
                 else if (stack.back() == '(' && s[i] == ')') stack.pop_back(); // Match
                 else if (stack.back() == '{' && s[i] == '}') stack.pop_back(); // Match
                 else return false; // Not match
